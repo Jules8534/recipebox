@@ -1,11 +1,19 @@
 from django import forms
+from news.models import Author
 
 class NewsAddForm(forms.Form):
     title = forms.CharField(max_length=30)
-    body = forms.CharField(widget=forms.Textarea)
+    description = forms.CharField(widget=forms.Textarea)
     author = forms.ModelChoiceField(queryset=Author.objects.all())
 
 
+
+class AuthorAddForm(forms.ModelForm):
+    class Meta:
+        model = Author
+        fields = [
+            'name'
+        ]
 
 
 """
@@ -26,4 +34,4 @@ class NewsItem(models.Model):
 
     def __str__(self):
         return self.title
-""""
+"""
