@@ -1,0 +1,10 @@
+<h1>Recipe Box</h1>
+<ul>
+    {% for news in data %}
+        <li><a href="/recipedetail/{{news.id}}/" >{{ news.title }}</a></li>
+    {% endfor %}
+</ul>
+
+
+
+
