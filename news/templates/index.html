@@ -1,10 +1,39 @@
-<h1>Recipe Box</h1>
+<html>
+<head>       
+    <title>RecipeBox</title>
+        {% load static %} 
+        <link rel="stylesheet" type="text/css" href={% static 'main/style.css' %} />  
+    </head> 
+    <body>
+        <h1>Welcome to Recipe Box!</h1>
+        <form action=" " method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <p>Don't have an account? Create one! <a href="/register">Here<a/></p>
+            <!-- <button>Login</button> -->
+        </form>
+ 
+<ul>       
+    {% if user.is_authenticated %} You are logged in!
+        {{ user.username }} 
+        <a href="{% url 'logout_url' %}"><button>Logout</button></a>
+    {% else %} You aren't logged in!        
+        <a href="{% url 'login_url' %}"><button>Login</button></a>
+    {% endif %}
+</ul>   
+    
 <ul>
     {% for news in data %}
         <li><a href="/recipedetail/{{news.id}}/" >{{ news.title }}</a></li>
     {% endfor %}
 </ul>
+  
+    <a href="{% url 'recipe_add' %}"><button>Add Recipe</button></a>
+    <a href="{% url 'author_add' %}"><button>Add Author</button></a>
 
+    </body>
+
+</html>
 
 
 

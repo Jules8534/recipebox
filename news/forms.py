@@ -7,13 +7,16 @@ class NewsAddForm(forms.Form):
     author = forms.ModelChoiceField(queryset=Author.objects.all())
 
 
+class AuthorAddForm(forms.Form):
+    name = forms.CharField(max_length=30)
+    bio = forms.CharField(widget=forms.Textarea)
+    username = forms.CharField(max_length=50)
+    password = forms.CharField(widget=forms.PasswordInput)
 
-class AuthorAddForm(forms.ModelForm):
-    class Meta:
-        model = Author
-        fields = [
-            'name'
-        ]
+
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length=50)
+    password = forms.CharField(widget=forms.PasswordInput)
 
 
 """
@@ -30,7 +33,8 @@ class NewsItem(models.Model):
     description = models.TextField()
     instructions = models.TextField()
     date = models.DateTimeField(default=timezone.now)
-    author =  models.ForeignKey(Author, on_delete=models.CASCADE)
+    author =  models.ForeignKey(
+        Author, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
