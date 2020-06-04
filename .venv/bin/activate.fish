@@ -29,7 +29,7 @@ end
 # unset irrelevant variables
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/Users/julita/KENZIE/Quarter_4/RecipeBox/.venv"
+set -gx VIRTUAL_ENV "/home/janell/django/julie_recipiebox/.venv"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH
