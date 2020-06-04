@@ -1,4 +1,4 @@
-#!/Users/julita/KENZIE/Quarter_4/RecipeBox/.venv/bin/python
+#!/home/janell/django/julie_recipiebox/.venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

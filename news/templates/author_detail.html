@@ -3,8 +3,15 @@
 <p>{{ author.bio }}</p>
 <h2>Recipes by {{ author.name }}:</h2>
 <ul>
-
     {% for detail in recipe %}
-    <a href="/recipedetail/{{detail.id}}/" >{{ detail.title }}</a>
+        <a href="/recipedetail/{{detail.id}}/" >{{ detail.title }}</a>
+    {% endfor %}
+</ul>
+<h2>{{author.name}}'s Favorite Recipes:</h2>
+<ul>
+    {% for favorite in favorites %}
+        <a href="/recipedetail/{{favorite.id}}/" ><li>{{ favorite }}</li></a>
+    {% empty %}
+        <li>It looks like this author doesn't have any favorites yet.</li>
     {% endfor %}
 </ul>

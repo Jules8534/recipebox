@@ -1,10 +1,16 @@
 from django import forms
 from news.models import Author
 
+
 class NewsAddForm(forms.Form):
     title = forms.CharField(max_length=30)
     description = forms.CharField(widget=forms.Textarea)
     author = forms.ModelChoiceField(queryset=Author.objects.all())
+
+
+class NewsEditForm(forms.Form):
+    title = forms.CharField(max_length=30)
+    description = forms.CharField(widget=forms.Textarea)
 
 
 class AuthorAddForm(forms.Form):
