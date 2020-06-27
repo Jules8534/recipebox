@@ -4,8 +4,8 @@ from news import views
 
 urlpatterns = [
     path('', views.index, name="homepage"),
-    path('recipeadd/', views.recipeadd),
-    path('authoradd/', views.authoradd),
+    path('recipe_add/', views.recipeadd, name='recipeadd'),
+    path('author_add/', views.authoradd, name='authoradd'),
     path("recipedetail/<int:id>/", views.recipe_detail),
     path("author/<int:id>/", views.author_detail),
 
