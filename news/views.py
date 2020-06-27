@@ -42,6 +42,9 @@ def index(request):
 def recipeadd(request):
     html = "generic_form.html"
 
+
+    print("Inside the view")
+
     if request.method == "POST":
         form = NewsAddForm(request.POST)
         if form.is_valid():
