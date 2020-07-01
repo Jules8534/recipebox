@@ -8,3 +8,13 @@
     <a href="/recipedetail/{{detail.id}}/" >{{ detail.title }}</a>
     {% endfor %}
 </ul>
+
+{% for data in author.favorite.all %}
+<ul>
+    <li>
+        <a href="/recipedetail/{{data.id}}/" >{{ data.title }}</a>
+    </li>
+</ul>
+{% endfor %}
+
+<a href="/">Home</a>

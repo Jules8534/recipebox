@@ -4,7 +4,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 
 from news.models import NewsItem, Author
-from news.forms import NewsAddForm, AuthorAddForm, LoginForm
+from news.forms import NewsAddForm, AuthorAddForm, LoginForm, EditRecipeForm
 
 
 
@@ -122,8 +122,44 @@ def author_detail(request, id):
     recipe = NewsItem.objects.filter(author=author)
     return render(request, 'author_detail.html', {'author': author, 'recipe': recipe})
 
+@login_required
+def edit_view(request, id):
+    recipe = NewsItem.objects.get(id=id)
+    if request.method == "POST":
+        form = EditRecipeForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            recipe.title = data['title']
+            recipe.description = data['description']
+            recipe.time_required = data['time_required']
+            recipe.instructions = data['instructions']
+            recipe.author = data['author']
+            recipe.save()
+            return HttpResponseRedirect(reverse('recipe_detail', args=(id,)))
 
-    
+    form = EditRecipeForm(initial={
+        'title': recipe.title,
+        'description': recipe.description,
+        'time_required': recipe.time_required,
+        'instructions': recipe.instructions,
+        'author': recipe.author,
+    })
+    return render(request, "generic_form.html", {'form': form})
 
-    
+@login_required
+def add_favorite(request, id):
+    #breakpoint()
+    user = request.user.author
+    recipe = NewsItem.objects.get(id=id)
+    user.favorite.add(recipe)
+    user.save()
+    return HttpResponseRedirect(reverse("recipe_detail",args=(id,)))
 
+@login_required
+def unadd_favorite(request,id):
+    #breakpoint()
+    user = request.user.author
+    recipe = NewsItem.objects.get(id=id)
+    user.favorite.remove(recipe)
+    user.save()
+    return HttpResponseRedirect(reverse("recipe_detail",args=(id,)))
