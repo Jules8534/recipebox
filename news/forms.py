@@ -1,5 +1,5 @@
 from django import forms
-from news.models import Author
+from news.models import Author, NewsItem
 
 class NewsAddForm(forms.Form):
     title = forms.CharField(max_length=30)
@@ -17,6 +17,17 @@ class AuthorAddForm(forms.Form):
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=50)
     password = forms.CharField(widget=forms.PasswordInput)
+
+class EditRecipeForm(forms.ModelForm):
+    class Meta:
+        model = NewsItem
+        fields = [
+            'title',
+            'time_required',
+            'description',
+            'instructions',
+            'author'
+            ]
 
 
 """

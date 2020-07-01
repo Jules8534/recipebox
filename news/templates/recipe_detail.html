@@ -15,3 +15,17 @@
     <p>{{ recipe.instructions }}</p>
 </li>
 </ul>
+
+{% if request.user.author.id == recipe.author.id or request.user.is_staff %}
+<a href="/edit/{{recipe.id}}">Edit Recipe</a>
+{% endif %}
+
+{% if request.user.is_authenticated %}
+{% if recipe not in user.author.favorite.all %}
+    <a href="/add_favorite/{{recipe.id}}">Favorite</a>
+{% else %}
+    <a href="/unadd_favorite/{{recipe.id}}">UnFavorite</a>
+{% endif %}
+{% endif %}
+
+<a href="/">Home</a>
